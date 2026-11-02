@@ -2,6 +2,7 @@ from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
 
 from tools.search_products import search_products
+from tools.search_promotions import search_promotions
 from tools.search_store_policies import search_store_policies
 
 
@@ -40,7 +41,7 @@ def create_store_agent():
 
     agent = create_agent(
         model=model,
-        tools=[search_store_policies,search_products],
+        tools=[search_store_policies,search_products,search_promotions],
         system_prompt=AGENT_PROMPT,
     )
 
