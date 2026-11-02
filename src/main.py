@@ -15,7 +15,7 @@ def main():
         "messages": [
             {
                 "role": "user",
-                "content": "Meu pedido é 1 e meu e-mail é outro@email.com."
+                "content": "Qual é a previsão do tempo?"
             }
         ]
     })
