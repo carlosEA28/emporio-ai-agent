@@ -1,14 +1,16 @@
-from rag.ingenstion import ingest, processPdf, split_documents
+from rag.ingenstion import ingest
+from rag.retriver import retrieve
 
 
 def main():
 
 
-    res = ingest("./data/pdf")
+    documents = retrieve("Posso pagar em 12 vezes?")
 
-
-
-    print(res)
+    for doc in documents:
+        print(f"Página: {doc.metadata.get('page', 0) + 1}")
+        print(f"Conteúdo: {doc.page_content}")
+        print("---")
 
 
 if __name__ == "__main__":
