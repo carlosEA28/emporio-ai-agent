@@ -1,11 +1,14 @@
-from rag.ingenstion import processPdf, split_documents
+from rag.ingenstion import ingest, processPdf, split_documents
 
 
 def main():
-    docs = processPdf("./data/pdf")
-    chunks = split_documents(docs)
 
-    print(chunks)
+
+    res = ingest("./data/pdf")
+
+
+
+    print(res)
 
 
 if __name__ == "__main__":
