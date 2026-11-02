@@ -1,6 +1,14 @@
+import os
+
+from chromadb.api import ClientAPI
 from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
+from dotenv import load_dotenv
+from pydantic import SecretStr
+load_dotenv()
 
+openai_key = os.environ.get("OPENAI_API_KEY", "")
+parsedKey = SecretStr(openai_key)
 
 def get_vector_store(
     collection_name: str = "store_policies",
@@ -8,7 +16,8 @@ def get_vector_store(
 ) -> Chroma:
 
     embedding_model = OpenAIEmbeddings(
-        model="text-embedding-3-small"
+        model="text-embedding-3-large",
+        api_key=parsedKey
     )
 
     vector_store = Chroma(
