@@ -1,26 +1,46 @@
-from dotenv.main import load_dotenv
-from langchain.agents import create_agent
+from dotenv import load_dotenv
 from agents.factory import create_store_agent
-from services.product_service import ProductService
-from tools.search_promotions import search_promotions
-from tools.search_store_policies import search_store_policies
 
 
 def main():
     load_dotenv()
 
     agent = create_store_agent()
+    messages = []
 
-    response = agent.invoke({
-        "messages": [
-            {
-                "role": "user",
-                "content": "Qual é a previsão do tempo?"
-            }
-        ]
-    })
+    print("Empório da Música — AI Assistant")
+    print("Digite 'sair' para encerrar.\n")
 
-    print(response["messages"][-1].content)
+    while True:
+        try:
+            question = input("Você: ").strip()
+        except (KeyboardInterrupt, EOFError):
+            print("\nAté logo!")
+            break
+
+        if question.lower() in ("sair", "exit", "quit"):
+            print("Até logo!")
+            break
+
+        if not question:
+            continue
+
+        messages.append({
+            "role": "user",
+            "content": question
+        })
+
+        try:
+            response = agent.invoke({"messages": messages})
+
+            messages = response["messages"]
+            answer = messages[-1].content
+
+            print(f"\nAssistente: {answer}\n")
+
+        except Exception as error:
+            messages.pop()
+            print(f"\nErro ao processar mensagem: {error}\n")
 
 
 if __name__ == "__main__":
