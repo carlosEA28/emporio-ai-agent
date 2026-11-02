@@ -8,29 +8,21 @@ from tools.search_store_policies import search_store_policies
 def main():
     load_dotenv()
 
-    # agent = create_store_agent()
+    agent = create_store_agent()
 
-    # response = agent.invoke({
-    #     "messages": [
-    #         {
-    #             "role": "user",
-    #             "content": "Moro em São Paulo. Quais opções de entrega vocês oferecem e quanto demoram?"
-    #         }
-    #     ]
-    # })
+    response = agent.invoke({
+        "messages": [
+            {
+                "role": "user",
+                "content": "Quero um violão de nylon por até R$ 600."
+            }
+        ]
+    })
 
-    # print(response["messages"][-1].content)
+    print(response["messages"][-1].content)
+    # print(response["messages"])
 
-    service = ProductService()
 
-    # Buscar violões disponíveis
-    print(service.search_products(category="Violões"))
-
-    # Buscar instrumentos Yamaha
-    print(service.search_products(name="Yamaha"))
-
-    # Consultar produtos incluindo indisponíveis
-    print(service.search_products(available_only=False))
 
 
 if __name__ == "__main__":
