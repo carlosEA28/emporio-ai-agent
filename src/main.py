@@ -1,5 +1,10 @@
+from rag.ingenstion import processPdf
+
+
 def main():
-    print("Hello from artefact-ai-case!")
+    docs = processPdf("./data/pdf")
+
+    print(docs)
 
 
 if __name__ == "__main__":
