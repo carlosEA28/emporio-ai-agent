@@ -13,13 +13,12 @@ def main():
         "messages": [
             {
                 "role": "user",
-                "content": "Qual é a política de devolução?"
+                "content": "Moro em São Paulo. Quais opções de entrega vocês oferecem e quanto demoram?"
             }
         ]
     })
 
     print(response["messages"][-1].content)
-    print(response["messages"])
 
 
 if __name__ == "__main__":
