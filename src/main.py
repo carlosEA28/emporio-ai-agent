@@ -15,25 +15,12 @@ def main():
         "messages": [
             {
                 "role": "user",
-                "content": "Quais violões estão em promoção?"
+                "content": "Meu pedido é 1 e meu e-mail é outro@email.com."
             }
         ]
     })
 
     print(response["messages"][-1].content)
-    # # print(response["messages"])
-
-
-
-    # print(search_promotions.invoke({
-    #     "category": "Ukuleles"
-    # }))
-
-    # print(search_promotions.invoke({
-    #     "category": "Violões"
-    # }))
-
-
 
 
 if __name__ == "__main__":
