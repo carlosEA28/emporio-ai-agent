@@ -1,6 +1,7 @@
 import logging
 from pathlib import Path
 from langchain_community.document_loaders import PyPDFLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,7 @@ def processPdf(pdf_directory:str):
 
 
             for doc in documents:
+                doc.page_content = " ".join(doc.page_content.split())
 
                 doc.metadata['source'] = pdf_file.name
                 doc.metadata['category'] = "Policy"
@@ -43,3 +45,18 @@ def processPdf(pdf_directory:str):
             raise
 
     return all_docs
+
+def split_documents(documents, chunks_size = 1000, chunks_overlap=200):
+    """Split the documents into chuncks"""
+
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=chunks_size,
+        chunk_overlap=chunks_overlap,
+        length_function=len,
+        separators=["\n\n","\n", " ", ""]
+
+    )
+
+    splitted_docs =splitter.split_documents(documents)
+
+    return splitted_docs
